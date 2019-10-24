@@ -6,6 +6,7 @@ using System.IO;
 public class UploadAssetBundleWindow : EditorWindow
 {
     private AssetBundleInterface _assetBundleInterface = new AssetBundleInterface();
+    private ServerInterface _serverInterface = new ServerInterface();
     
     private string[] assetBundleOptions; // utilize for asset bundle selection from Popup element
     private int optionIndex; // needed for indexing of assetBundleOptions
@@ -28,5 +29,12 @@ public class UploadAssetBundleWindow : EditorWindow
         optionIndex = EditorGUILayout.Popup(optionIndex, assetBundleOptions);
         pathToScene = _assetBundleInterface.GetPathToScene(assetBundleOptions, optionIndex);
         pathToScene = EditorGUILayout.TextField ("Path to Scene", pathToScene);
+        
+        if (GUILayout.Button("Upload Scene"))
+        {
+            // TODO: Select the path to the build asset bundle, not to the raw scene file
+            _serverInterface.UploadAssetBundle(pathToScene); // just for testing
+        }
+
     }
 }

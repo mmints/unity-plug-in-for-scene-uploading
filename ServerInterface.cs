@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class ServerInterface : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void UploadAssetBundle(string pathToAssetBundle)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // TODO: Implement this
+        Debug.Log("Upload: " + pathToAssetBundle);
     }
 }
