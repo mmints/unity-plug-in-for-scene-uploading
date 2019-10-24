@@ -1,18 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
+using System.IO;
 
-public class UploadAssetBundleWindow : MonoBehaviour
+public class UploadAssetBundleWindow : EditorWindow
 {
-    // Start is called before the first frame update
-    void Start()
+    private string[] assetBundleOptions; // utilize for asset bundle selection from Popup element
+    private int optionIndex; // needed for indexing of assetBundleOptions
+
+    [MenuItem("Window/Upload Scene to Moodle Server")] // Add menu item to the Window menu
+    public static void ShowWindow()
     {
-        
+        // Show existing window instance. If one doesn't exist, make one.
+        EditorWindow.GetWindow(typeof(UploadAssetBundleWindow));
+    }
+    
+    void OnEnable()
+    {
+        assetBundleOptions = AssetDatabase.GetAllAssetBundleNames(); // fill assetBundleOptions when opening the window
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnGUI()
     {
-        
+        optionIndex = EditorGUILayout.Popup(optionIndex, assetBundleOptions);
     }
 }
