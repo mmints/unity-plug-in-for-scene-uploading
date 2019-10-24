@@ -5,9 +5,12 @@ using System.IO;
 
 public class UploadAssetBundleWindow : EditorWindow
 {
+    private AssetBundleInterface _assetBundleInterface = new AssetBundleInterface();
+    
     private string[] assetBundleOptions; // utilize for asset bundle selection from Popup element
     private int optionIndex; // needed for indexing of assetBundleOptions
-
+    private string pathToScene;
+    
     [MenuItem("Window/Upload Scene to Moodle Server")] // Add menu item to the Window menu
     public static void ShowWindow()
     {
@@ -23,5 +26,7 @@ public class UploadAssetBundleWindow : EditorWindow
     void OnGUI()
     {
         optionIndex = EditorGUILayout.Popup(optionIndex, assetBundleOptions);
+        pathToScene = _assetBundleInterface.GetPathToScene(assetBundleOptions, optionIndex);
+        pathToScene = EditorGUILayout.TextField ("Path to Scene", pathToScene);
     }
 }

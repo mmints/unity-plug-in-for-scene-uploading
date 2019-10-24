@@ -1,18 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEditor;
 using UnityEngine;
 
 public class AssetBundleInterface : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public string GetPathToScene(string[] options, int index)
+    // TODO: Use a Tuple to return a string and a boolean
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        string[] paths = AssetDatabase.GetAssetPathsFromAssetBundle(options[index]);
+        if (paths.Length == 0)
+        {
+            return "Selected AssetBundle Is Not Assigned to a Scene";
+        }
+        else {
+            return paths[0];
+        }
     }
 }
