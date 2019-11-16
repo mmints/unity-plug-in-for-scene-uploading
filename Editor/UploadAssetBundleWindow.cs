@@ -1,40 +1,46 @@
-﻿using System;
+﻿using System.IO;
 using UnityEditor;
 using UnityEngine;
-using System.IO;
 
-public class UploadAssetBundleWindow : EditorWindow
+namespace Editor
 {
-    private AssetBundleInterface _assetBundleInterface = new AssetBundleInterface();
-    private ServerInterface _serverInterface = new ServerInterface();
-    
-    private string[] assetBundleOptions; // utilize for asset bundle selection from Popup element
-    private int optionIndex; // needed for indexing of assetBundleOptions
-    private string pathToScene;
-    
-    [MenuItem("Window/Upload Scene to Moodle Server")] // Add menu item to the Window menu
-    public static void ShowWindow()
+    public class UploadAssetBundleWindow : EditorWindow
     {
-        // Show existing window instance. If one doesn't exist, make one.
-        EditorWindow.GetWindow(typeof(UploadAssetBundleWindow));
-    }
+        private AssetBundleInterface _assetBundleInterface = new AssetBundleInterface();
+        private ServerInterface _serverInterface = new ServerInterface();
     
-    void OnEnable()
-    {
-        assetBundleOptions = AssetDatabase.GetAllAssetBundleNames(); // fill assetBundleOptions when opening the window
-    }
-
-    void OnGUI()
-    {
-        optionIndex = EditorGUILayout.Popup(optionIndex, assetBundleOptions);
-        pathToScene = _assetBundleInterface.GetPathToScene(assetBundleOptions, optionIndex);
-        pathToScene = EditorGUILayout.TextField ("Path to Scene", pathToScene);
-        
-        if (GUILayout.Button("Upload Scene"))
+        private string[] assetBundleOptions; // utilize for asset bundle selection from Popup element
+        private int optionIndex; // needed for indexing of assetBundleOptions
+        private string pathToScene;
+    
+        [MenuItem("Window/Upload Scene to Moodle Server")] // Add menu item to the Window menu
+        public static void ShowWindow()
         {
-            // TODO: Select the path to the build asset bundle, not to the raw scene file
-            _serverInterface.UploadAssetBundle(pathToScene); // just for testing
+            // Show existing window instance. If one doesn't exist, make one.
+            EditorWindow.GetWindow(typeof(UploadAssetBundleWindow));
+        }
+    
+        void OnEnable()
+        {
+            assetBundleOptions = AssetDatabase.GetAllAssetBundleNames(); // fill assetBundleOptions when opening the window
         }
 
+        void OnGUI()
+        {
+            if (GUILayout.Button("Build Scene"))
+            {
+                _assetBundleInterface.BuildAllAssetBundles("Assets/AssetBundles");
+            }
+    
+        
+            optionIndex = EditorGUILayout.Popup(optionIndex, assetBundleOptions);
+        
+            if (GUILayout.Button("Upload Scene"))
+            {
+                // TODO: Select the path to the build asset bundle, not to the raw scene file
+                _serverInterface.UploadAssetBundle(pathToScene); // just for testing
+            }
+
+        }
     }
 }
