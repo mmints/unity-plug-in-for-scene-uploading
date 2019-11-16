@@ -11,7 +11,6 @@ namespace Editor
     
         private string[] assetBundleOptions; // utilize for asset bundle selection from Popup element
         private int optionIndex; // needed for indexing of assetBundleOptions
-        private string pathToScene;
     
         [MenuItem("Window/Upload Scene to Moodle Server")] // Add menu item to the Window menu
         public static void ShowWindow()
@@ -38,7 +37,7 @@ namespace Editor
             if (GUILayout.Button("Upload Scene"))
             {
                 // TODO: Select the path to the build asset bundle, not to the raw scene file
-                _serverInterface.UploadAssetBundle(pathToScene); // just for testing
+                _serverInterface.UploadAssetBundle("Assets/AssetBundles/test0"); // just for testing
             }
 
         }
