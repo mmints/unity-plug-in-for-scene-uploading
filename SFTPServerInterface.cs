@@ -13,7 +13,7 @@ public class SFTPServerInterface : MonoBehaviour
         _serverUri = serverUri;
     }
 
-    public void UploadFile(string pathToFile, string userName, string password)
+    public void UploadFile(string pathToFile, string userName, string password) // TODO: Make this secure!
     {
         string fileName = GetFileNameFromPath(pathToFile);
         var connectionInfo = new ConnectionInfo(_serverUri, userName, new PasswordAuthenticationMethod(userName, password));

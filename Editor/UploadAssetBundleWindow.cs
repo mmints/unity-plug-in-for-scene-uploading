@@ -9,7 +9,6 @@ namespace Editor
         private AssetBundleInterface _assetBundleInterface = new AssetBundleInterface();
         private SFTPServerInterface _serverInterface = new SFTPServerInterface("odl4u.ko-ld.de");
         
-        // TODO: Make this secure!
         private string _username;
         private string _password;
         
@@ -46,7 +45,7 @@ namespace Editor
             _optionIndex = EditorGUILayout.Popup(_optionIndex, _assetBundleOptions);
         
             _username = EditorGUILayout.TextField ("Username", _username);
-            _password = EditorGUILayout.TextField ("Password", _password);
+            _password = EditorGUILayout.PasswordField("Password", _password);
             
             if (GUILayout.Button("Upload Scene"))
             {
