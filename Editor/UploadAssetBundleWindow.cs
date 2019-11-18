@@ -7,8 +7,13 @@ namespace Editor
     public class UploadAssetBundleWindow : EditorWindow
     {
         private AssetBundleInterface _assetBundleInterface = new AssetBundleInterface();
-        private ServerInterface _serverInterface = new ServerInterface();
-    
+        //private ServerInterface _serverInterface = new ServerInterface("ftp://odl4u.ko-ld.de/home/mmints/unity-webservice");
+        private SFTPServerInterface _serverInterface = new SFTPServerInterface("odl4u.ko-ld.de");
+
+        // TODO: Make this secure!
+        private string username;
+        private string password;
+        
         private string[] assetBundleOptions; // utilize for asset bundle selection from Popup element
         private int optionIndex; // needed for indexing of assetBundleOptions
     
@@ -30,16 +35,17 @@ namespace Editor
             {
                 _assetBundleInterface.BuildAllAssetBundles("Assets/AssetBundles");
             }
-    
-        
+            
             optionIndex = EditorGUILayout.Popup(optionIndex, assetBundleOptions);
         
+            username = EditorGUILayout.TextField ("Username", username);
+            password = EditorGUILayout.TextField ("Password", password);
+            
             if (GUILayout.Button("Upload Scene"))
             {
                 // TODO: Select the path to the build asset bundle, not to the raw scene file
-                _serverInterface.UploadAssetBundle("Assets/AssetBundles/test0"); // just for testing
+                _serverInterface.UploadFile("Assets/AssetBundles/test0", username, password); // just for testing
             }
-
         }
     }
 }
