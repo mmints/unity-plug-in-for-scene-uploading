@@ -16,7 +16,7 @@ namespace Editor
         private string[] _assetBundleOptions; // utilize for asset bundle selection from Popup element
         private int _optionIndex; // needed for indexing of assetBundleOptions
     
-        [MenuItem("Window/Upload Scene to Moodle Server")] // Add menu item to the Window menu
+        [MenuItem("Window/Upload Asset Bundle to Moodle Server")] // Add menu item to the Window menu
         public static void ShowWindow()
         {
             // Show existing window instance. If one doesn't exist, make one.
@@ -37,7 +37,7 @@ namespace Editor
 
         void OnGUI()
         {
-            if (GUILayout.Button("Build Scene"))
+            if (GUILayout.Button("Build All Asset Bundles"))
             {
                 _assetBundleInterface.BuildAllAssetBundles(_assetBundleBuildDirectory);
             }
@@ -47,7 +47,7 @@ namespace Editor
             _username = EditorGUILayout.TextField ("Username", _username);
             _password = EditorGUILayout.PasswordField("Password", _password);
             
-            if (GUILayout.Button("Upload Scene"))
+            if (GUILayout.Button("Upload Asset Bundles"))
             {
                 if (File.Exists(_assetBundleBuildDirectory + _assetBundleOptions[_optionIndex]))
                 {
