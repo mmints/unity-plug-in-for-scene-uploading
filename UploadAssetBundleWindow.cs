@@ -2,8 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Editor
-{
+
     public class UploadAssetBundleWindow : EditorWindow
     {
         private AssetBundleInterface _assetBundleInterface = new AssetBundleInterface();
@@ -27,12 +26,12 @@ namespace Editor
         {
             _assetBundleOptions = AssetDatabase.GetAllAssetBundleNames(); // fill assetBundleOptions when opening the window
             
+            // Just needed for 
             Debug.Log("Available Asset Bundles: ");
             foreach (var ab in _assetBundleOptions)
             {
                 Debug.Log(ab);
             }
-            Debug.Log("\n ==== \n");
         }
 
         void OnGUI()
@@ -60,4 +59,3 @@ namespace Editor
             }
         }
     }
-}
