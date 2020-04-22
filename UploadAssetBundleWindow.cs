@@ -84,6 +84,6 @@ public class UploadAssetBundleWindow : EditorWindow
         
         EditorGUILayout.Space();
 
-        EditorGUILayout.HelpBox("PLACEHOLDER - Show help to the user", MessageType.Info);
+        EditorGUILayout.HelpBox("Start Scene Selection has currently no effect on uploading. The feature will be implemented in future.", MessageType.Warning);
     }
 }
